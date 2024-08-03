@@ -1,0 +1,37 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Leaderboard{% endblock %}
+{% block content %}
+
+<div class="page-header text-center">
+  <h1>Leaderboard</h1>
+  <p class="lead">Top contributors to our recycling efforts!</p>
+</div>
+
+<div class="leaderboard-container">
+  <div class="leaderboard">
+    <div class="leaderboard-header">
+      <div class="rank">Rank</div>
+      <div class="name">Name</div>
+      <div class="points">Points</div>
+    </div>
+    <div class="leaderboard-body">
+      {% for user in users %}
+      <div class="leaderboard-item">
+        <div class="rank">{{ loop.index }}</div>
+        <div class="name">{{ user.name }}</div>
+        <div class="points">{{ user.points }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<form class="form" action="/update-points" method="post">
+    <div class="form-group">
+      <label for="points">Update Dynamic User Points</label>
+      <input type="number" class="form-control" id="points" name="points" placeholder="Enter new points">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endblock %}

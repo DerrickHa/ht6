@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 # from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
@@ -16,6 +16,13 @@ import os
 app = Flask(__name__)
 app.config.from_object('config')
 #db = SQLAlchemy(app)
+
+leaderboard_data = [
+    {"name": "Alice", "points": 150},
+    {"name": "Bob", "points": 120},
+    {"name": "Charlie", "points": 90},
+    {"name": "Dynamic User", "points": 0}  # This entry will change based on events
+]
 
 # Automatically tear down SQLAlchemy.
 '''
@@ -40,11 +47,31 @@ def login_required(test):
 # Controllers.
 #----------------------------------------------------------------------------#
 
+def update_dynamic_user_points(new_points):
+    for user in leaderboard_data:
+        if user['name'] == "Dynamic User":
+            user['points'] = new_points
+            break
 
 @app.route('/')
 def home():
     return render_template('pages/placeholder.home.html')
 
+
+@app.route('/leaderboard')
+def leaderboard():
+    # Here you could update the dynamic entry based on some condition or event
+    # For example, update_dynamic_user_points(200)
+    return render_template('pages/leaderboard.html', users=leaderboard_data)
+
+@app.route('/update-points', methods=['POST'])
+def update_points():
+    # Simulate an event that updates the dynamic user's points
+    # This route can be triggered by a form submission or any other event
+    new_points = request.form.get('points', type=int)
+    if new_points is not None:
+        update_dynamic_user_points(new_points)
+    return redirect('/leaderboard')
 
 @app.route('/about')
 def about():

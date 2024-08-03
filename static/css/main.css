@@ -33,4 +33,58 @@ a {
  * Various other styles
  ****************************************************************************/
 
+ .page-header {
+  padding: 20px 0;
+}
+
+.leaderboard-container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard {
+  width: 100%;
+}
+
+.leaderboard-header,
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-header {
+  font-weight: bold;
+  background-color: #3EB489;
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+}
+
+.leaderboard-item {
+  background-color: #fff;
+}
+
+.leaderboard-item:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.rank, .name, .points {
+  width: 33%;
+  text-align: center;
+}
+
+.leaderboard-item .rank {
+  font-weight: bold;
+  color: #3EB489;
+}
+
+.form {
+  padding-top: 20px;
+}
+
 /* Various other styles end */
