@@ -3,6 +3,8 @@
 
 Servo sortServo;
 //port: COM4 (Elecrow CrowPanel 7.0P)
+//port: /dev/cu.usbserial-110
+
 
 const int trigPin = 2;
 const int echoPin = 4;

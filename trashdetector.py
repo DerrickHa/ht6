@@ -4,6 +4,8 @@ import serial
 from supabase import create_client, Client
 import time
 
+#0312
+
 SUPABASE_URL = "https://sndaxdsredktgpsakage.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZGF4ZHNyZWRrdGdwc2FrYWdlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjcxOTIyNywiZXhwIjoyMDM4Mjk1MjI3fQ.62q7Xfaifhqg26p6wapWd-bOfekg3ACHw85W4p0h8yM"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
@@ -82,16 +84,16 @@ while True:
             print("Send A")
             esp32.write('A'.encode('utf-8'))
             prevtime = time.time()
-          if recentGuess == "recycle":
-            print("Success")
-            leaderboardScore += 150
-            updateScore()
-            # esp32.write('C'.encode('utf-8'))
-          else:
-            print("Wrong Bin")
-            leaderboardScore -= 150
-            updateScore()
-            # esp32.write('D'.encode('utf-8'))
+            if recentGuess == "recycle":
+              print("Success")
+              leaderboardScore += 150
+              updateScore()
+              esp32.write('C'.encode('utf-8'))
+            else:
+              print("Wrong Bin")
+              leaderboardScore -= 150
+              updateScore()
+              esp32.write('D'.encode('utf-8'))
         else:
           print("Trash")
           print(time.time() - prevtime)
@@ -99,16 +101,16 @@ while True:
             print("Send B")
             esp32.write('B'.encode('utf-8'))
             prevtime = time.time()
-          if recentGuess == "garbage":
-            print("Success")
-            leaderboardScore += 100
-            updateScore()
-            # esp32.write('C'.encode('utf-8'))
-          else:
-            print("Wrong bin")
-            leaderboardScore -= 200
-            updateScore()
-            # esp32.write('D'.encode('utf-8'))
+            if recentGuess == "garbage":
+              print("Success")
+              leaderboardScore += 100
+              updateScore()
+              esp32.write('C'.encode('utf-8'))
+            else:
+              print("Wrong bin")
+              leaderboardScore -= 200
+              updateScore()
+              esp32.write('D'.encode('utf-8'))
   cv.imshow('my webcam', img)
   if cv.waitKey(1) == 27: 
     break 
