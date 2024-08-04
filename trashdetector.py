@@ -8,7 +8,8 @@ SUPABASE_URL = "https://sndaxdsredktgpsakage.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZGF4ZHNyZWRrdGdwc2FrYWdlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjcxOTIyNywiZXhwIjoyMDM4Mjk1MjI3fQ.62q7Xfaifhqg26p6wapWd-bOfekg3ACHw85W4p0h8yM"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-esp32 = serial.Serial(port='COM4', baudrate=115200, timeout=.1)
+# esp32 = serial.Serial(port='COM4', baudrate=115200, timeout=.1)
+esp32 = serial.Serial(port='/dev/cu.usbserial-110', baudrate=115200, timeout=.1)
 
 classes = ["background", "person", "bicycle", "car", "motorcycle",
   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
@@ -34,7 +35,7 @@ pbt = 'ssd_inception_v2_coco_2017_11_17.pbtxt'
 
 cvNet = cv.dnn.readNetFromTensorflow(pb,pbt)   
 
-recentGuess = "recycle"
+recentGuess = ""
 prevtime = time.time()
 leaderboardScore = 0 #send to database
 
