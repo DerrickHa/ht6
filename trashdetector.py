@@ -40,7 +40,12 @@ leaderboardScore = 0 #send to database
 
 def updateScore():
   global leaderboardScore
-  response = supabase.table('leaderboard').insert([{"aura": leaderboardScore}]).execute()
+  response = supabase.table('leaderboard').select('id').eq(1).execute()
+  if response['count'] > 0:
+    row_id = response['data'][0]['id']
+    response = supabase.table('leaderboard').update({"aura": leaderboardScore}).eq('id', row_id).execute()
+  else:
+    response = supabase.table('leaderboard').insert([{"id": 1, "aura": leaderboardScore}]).execute()
   print(response)
 
 while True:
