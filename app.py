@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 import logging
 from logging import Formatter, FileHandler
 from supabase import create_client, Client
 from forms import *
-import os
 
 app = Flask(__name__)
 app.config.from_object('config')

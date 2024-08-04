@@ -1,9 +1,14 @@
 import cv2 as cv
 import numpy as np
-from serial import Serial
+import serial
+from supabase import create_client, Client
 import time
 
-esp32 = Serial(port='COM4', baudrate=115200, timeout=.1)
+SUPABASE_URL = "https://sndaxdsredktgpsakage.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZGF4ZHNyZWRrdGdwc2FrYWdlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjcxOTIyNywiZXhwIjoyMDM4Mjk1MjI3fQ.62q7Xfaifhqg26p6wapWd-bOfekg3ACHw85W4p0h8yM"
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+esp32 = serial.Serial(port='COM4', baudrate=115200, timeout=.1)
 
 classes = ["background", "person", "bicycle", "car", "motorcycle",
   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
@@ -29,9 +34,19 @@ pbt = 'ssd_inception_v2_coco_2017_11_17.pbtxt'
 
 cvNet = cv.dnn.readNetFromTensorflow(pb,pbt)   
 
-recentGuess = ""
+recentGuess = "recycle"
 prevtime = time.time()
 leaderboardScore = 0 #send to database
+
+def updateScore():
+  global leaderboardScore
+  response = supabase.table('leaderboard').select('id').eq(1).execute()
+  if response['count'] > 0:
+    row_id = response['data'][0]['id']
+    response = supabase.table('leaderboard').update({"aura": leaderboardScore}).eq('id', row_id).execute()
+  else:
+    response = supabase.table('leaderboard').insert([{"id": 1, "aura": leaderboardScore}]).execute()
+  print(response)
 
 while True:
   data = esp32.readline().decode('utf-8').strip()
@@ -73,10 +88,12 @@ while True:
           if recentGuess == "recycle":
             print("Success")
             leaderboardScore += 150
+            updateScore()
             esp32.write('C'.encode('utf-8'))
           else:
             print("Wrong Bin")
             leaderboardScore -= 150
+            updateScore()
             esp32.write('D'.encode('utf-8'))
         else:
           print("Trash")
@@ -87,10 +104,12 @@ while True:
           if recentGuess == "garbage":
             print("Success")
             leaderboardScore += 100
+            updateScore()
             esp32.write('C'.encode('utf-8'))
           else:
             print("Wrong bin")
             leaderboardScore -= 200
+            updateScore()
             esp32.write('D'.encode('utf-8'))
   cv.imshow('my webcam', img)
   if cv.waitKey(1) == 27: 
