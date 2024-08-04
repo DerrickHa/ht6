@@ -1,0 +1,34 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Leaderboard{% endblock %}
+{% block content %}
+
+<div class="page-header text-center">
+  <h1>Leaderboard</h1>
+  <p class="lead">Top contributors to our recycling efforts!</p>
+</div>
+
+<div class="leaderboard-container">
+  <div class="leaderboard">
+    <div class="leaderboard-header">
+      <div class="rank">Rank</div>
+      <div class="name">Name</div>
+      <div class="points">Aura</div>
+    </div>
+    <div class="leaderboard-body">
+        {% if entries %}
+          {% for entry in entries %}
+            <div class="leaderboard-item">
+              <div class="rank">{{ loop.index }}</div>
+              <div class="name">{{ entry.name }}</div>
+              <div class="points">{{ entry.aura }}</div>
+            </div>
+          {% endfor %}
+        {% else %}
+            <p>No entries found.</p>
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

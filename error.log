@@ -1,1 +1,158 @@
+2024-08-03 21:04:19,278 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:77]
+2024-08-03 21:04:35,447 ERROR: Error fetching leaderboard entry: 'APIResponse[TypeVar]' object has no attribute 'status_code' [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:36]
+2024-08-03 21:04:35,449 ERROR: Exception on /leaderboard [GET] [in /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/app.py", line 26, in leaderboard
+    if response.status_code == 200 and response.data:
+       ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/pydantic/main.py", line 828, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'APIResponse[TypeVar]' object has no attribute 'status_code'
 
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/app.py", line 37, in leaderboard
+    return render_template('errors/500.html'), 500
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/templates/errors/500.html", line 1, in top-level template code
+    {% extends 'layouts/main.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/templates/layouts/main.html", line 80, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/templates/errors/500.html", line 5, in block 'content'
+    <p><a href="{{url_for('index')}}">Back</a></p>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'index'. Did you mean 'login' instead?
+2024-08-03 21:04:35,515 ERROR: Exception on /favicon.ico [GET] [in /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py:838]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 765, in handle_user_exception
+    return self.handle_http_exception(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 740, in handle_http_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/app.py", line 65, in not_found_error
+    return render_template('errors/404.html'), 404
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/jinja2/environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/templates/errors/404.html", line 1, in top-level template code
+    {% extends 'layouts/main.html' %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/templates/layouts/main.html", line 80, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nickdelaguila/Downloads/flask-boilerplate/templates/errors/404.html", line 5, in block 'content'
+    <p><a href="{{url_for('index')}}">Back</a></p>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/flask/app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'index'. Did you mean 'login' instead?
+2024-08-03 21:06:58,733 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:76]
+2024-08-03 21:07:07,367 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:30]
+2024-08-03 21:08:38,754 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:72]
+2024-08-03 21:08:49,872 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:30]
+2024-08-03 21:08:55,507 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:72]
+2024-08-03 21:08:58,424 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}, {'name': 'Nick', 'aura': '150'}, {'name': 'Darren', 'aura': '150'}, {'name': 'Nic Chen', 'aura': '200'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:09:15,740 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}, {'name': 'Nick', 'aura': '150'}, {'name': 'Darren', 'aura': '150'}, {'name': 'Nic Chen', 'aura': '200'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:09:28,603 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:72]
+2024-08-03 21:09:30,662 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:09:43,618 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:10:51,860 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:70]
+2024-08-03 21:10:54,820 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:28:19,001 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:28:23,502 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:70]
+2024-08-03 21:28:25,940 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:29:03,341 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:29:07,462 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:29:20,543 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:29:21,949 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:29:25,532 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 21:29:31,804 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:70]
+2024-08-03 21:29:33,549 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 22:16:37,967 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:70]
+2024-08-03 22:16:41,667 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 22:20:04,637 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:82]
+2024-08-03 22:20:07,183 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 22:21:26,997 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:82]
+2024-08-03 22:21:29,229 INFO: Supabase response: data=[{'name': 'Derrick', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:26]
+2024-08-03 22:25:08,205 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:68]
+2024-08-03 22:25:26,013 INFO: Supabase response: data=[{'id': 4, 'name': 'Nic Chen', 'aura': '200'}, {'id': 1, 'name': 'Derrick', 'aura': '150'}, {'id': 2, 'name': 'Nick', 'aura': '150'}, {'id': 3, 'name': 'Darren', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:25]
+2024-08-03 22:25:26,013 ERROR: Error fetching leaderboard entry: leaderboard.html [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:28]
+2024-08-03 22:26:40,842 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:74]
+2024-08-03 22:26:50,475 INFO: Supabase response: data=[{'id': 4, 'name': 'Nic Chen', 'aura': '200'}, {'id': 1, 'name': 'Derrick', 'aura': '150'}, {'id': 2, 'name': 'Nick', 'aura': '150'}, {'id': 3, 'name': 'Darren', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:31]
+2024-08-03 22:27:30,748 INFO: Supabase response: data=[{'id': 4, 'name': 'Nic Chen', 'aura': '200'}, {'id': 1, 'name': 'Derrick', 'aura': '150'}, {'id': 2, 'name': 'Nick', 'aura': '150'}, {'id': 3, 'name': 'Darren', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:31]
+2024-08-03 22:27:53,672 INFO: errors [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:68]
+2024-08-03 22:27:56,274 INFO: Supabase response: data=[{'id': 4, 'name': 'Nic Chen', 'aura': '200'}, {'id': 1, 'name': 'Derrick', 'aura': '150'}, {'id': 2, 'name': 'Nick', 'aura': '150'}, {'id': 3, 'name': 'Darren', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:25]
+2024-08-03 23:20:24,301 INFO: Supabase response: data=[{'id': 4, 'name': 'Nic Chen', 'aura': '200'}, {'id': 1, 'name': 'Derrick', 'aura': '150'}, {'id': 2, 'name': 'Nick', 'aura': '150'}, {'id': 3, 'name': 'Darren', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:25]
+2024-08-03 23:20:27,218 INFO: Supabase response: data=[{'id': 4, 'name': 'Nic Chen', 'aura': '200'}, {'id': 1, 'name': 'Derrick', 'aura': '150'}, {'id': 2, 'name': 'Nick', 'aura': '150'}, {'id': 3, 'name': 'Darren', 'aura': '150'}] count=None [in /Users/nickdelaguila/Downloads/flask-boilerplate/app.py:25]

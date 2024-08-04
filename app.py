@@ -1,80 +1,63 @@
 from flask import Flask, render_template, request, redirect
 import logging
 from logging import Formatter, FileHandler
+from supabase import create_client, Client
 from forms import *
 import os
 
 app = Flask(__name__)
 app.config.from_object('config')
-#db = SQLAlchemy(app)
 
-# Automatically tear down SQLAlchemy.
-'''
-@app.teardown_request
-def shutdown_session(exception=None):
-    db_session.remove()
-'''
-
-# Login required decorator.
-'''
-def login_required(test):
-    @wraps(test)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return test(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
-'''
+# Supabase configuration
+SUPABASE_URL = "https://sndaxdsredktgpsakage.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZGF4ZHNyZWRrdGdwc2FrYWdlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjcxOTIyNywiZXhwIjoyMDM4Mjk1MjI3fQ.62q7Xfaifhqg26p6wapWd-bOfekg3ACHw85W4p0h8yM"
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.route('/')
 def home():
     return render_template('pages/placeholder.home.html')
-
-
+    
 @app.route('/leaderboard')
 def leaderboard():
-    # Here you could update the dynamic entry based on some condition or event
-    # For example, update_dynamic_user_points(200)
-    return render_template('pages/leaderboard.html')
+    try:
+        response = supabase.table('leaderboard').select('*').order('aura', desc=True).execute()
+        entries = response.data
+        app.logger.info(f"Supabase response: {response}")
+        return render_template('pages/leaderboard.html', entries=entries)
+    except Exception as e:
+        app.logger.error(f"Error fetching leaderboard entry: {str(e)}")
+        return render_template('errors/500.html'), 500
 
 @app.route('/about')
 def about():
     return render_template('pages/placeholder.about.html')
-
 
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
     return render_template('forms/login.html', form=form)
 
-
 @app.route('/register')
 def register():
     form = RegisterForm(request.form)
     return render_template('forms/register.html', form=form)
-
 
 @app.route('/forgot')
 def forgot():
     form = ForgotForm(request.form)
     return render_template('forms/forgot.html', form=form)
 
-# Error handlers.
-
-
 @app.errorhandler(500)
 def internal_error(error):
-    #db_session.rollback()
     return render_template('errors/500.html'), 500
-
 
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('errors/404.html'), 404
 
 if not app.debug:
+    import logging
+    from logging import Formatter, FileHandler
     file_handler = FileHandler('error.log')
     file_handler.setFormatter(
         Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
@@ -84,17 +67,5 @@ if not app.debug:
     app.logger.addHandler(file_handler)
     app.logger.info('errors')
 
-#----------------------------------------------------------------------------#
-# Launch.
-#----------------------------------------------------------------------------#
-
-# Default port:
 if __name__ == '__main__':
     app.run()
-
-# Or specify port manually:
-'''
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-'''
