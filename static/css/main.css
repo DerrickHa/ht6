@@ -137,3 +137,7 @@ a {
   color: black;
   transition: color 200ms;
 }
+
+.lead {
+  color: black
+}
