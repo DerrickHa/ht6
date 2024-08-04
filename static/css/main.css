@@ -98,6 +98,11 @@ a {
   margin-top: 14px;
 }
 
+.image {
+  width: 300px;
+  height: auto;
+}
+
 .trophy {
   width: 300px;
   height: auto;
