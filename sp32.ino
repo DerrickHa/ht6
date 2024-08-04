@@ -1,4 +1,4 @@
-/* #include <math.h>
+#include <math.h>
 #include <ESP32Servo.h>
 
 Servo sortServo;
@@ -7,7 +7,8 @@ Servo sortServo;
 const int trigPin = 2;
 const int echoPin = 4;
 const int pirPin = 16;
-const int buttonPin = 21;
+const int redLEDPin = 21;
+const int greenLEDPin = 19;
 
 float duration, distance;
 double averageUltraReading;
@@ -28,6 +29,8 @@ void setup()
   pinMode(echoPin, INPUT);
   pinMode(pirPin, INPUT); 
   pinMode(buttonPin, INPUT);
+  pinMode(redLEDPin, OUTPUT);
+  pinMode(greenLEDPin, INPUT);
   
   Serial.begin(115200);
   
@@ -136,4 +139,4 @@ void loop()
 //  Serial.println(digitalRead(buttonPin));
 
   delay(100);
-} */
+}
