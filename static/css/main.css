@@ -91,8 +91,6 @@ a {
   margin-top: 20px;
 }
 
-/* Various other styles end */
-
 .trash {
   width: 300px;
   height: auto;
@@ -107,7 +105,35 @@ a {
 
 .btn-custom-grey {
   margin-top: 10px;
-  background-color: #6c757d;
-  border-color: #6c757d;
-  color: #ffffff; 
+  background-color: #ffffff;
+  border-color: #3EB489;
+  color: #3EB489;
+  transition: background-color 200ms, border-color 200ms, color 200ms;
+}
+
+.btn-custom-grey:hover {
+  margin-top: 10px;
+  background-color: #3EB489;
+  border-color: #3EB489;
+  color: #ffffff;
+  transition: background-color 200ms, border-color 200ms, color 200ms;
+}
+
+.signup-link {
+  color: #3EB489;
+  transition: color 200ms;
+}
+
+.signup-link:hover {
+  color: black;
+  transition: color 200ms;
+}
+
+.nav-link {
+  transition: color 200ms;
+}
+
+.nav-link:hover {
+  color: black;
+  transition: color 200ms;
 }

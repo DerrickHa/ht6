@@ -48,16 +48,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">BasketBin</a>
+          <a class="navbar-brand" href="/" style="color: black">Basket<span style="color: #3EB489">Bin</span></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Home</a></li>
-            <li {% if request.endpoint == 'leaderboard' %} class="active" {% endif %}><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+            <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+            <li {% if request.endpoint == 'leaderboard' %} class="active" {% endif %}><a href="{{ url_for('leaderboard') }}" class="nav-link">Leaderboard</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
-            <li><a href="{{ url_for('register') }}">Sign Up</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}" class="signup-link">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}" class="nav-link">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
