@@ -28,7 +28,7 @@ recycable = ["cup" , "bottle"]
 trash = ["fork", "spoon", "knife"]
 
 colors = np.random.uniform(0, 255, size=(len(classes), 3))
-cam = cv.VideoCapture(0)
+cam = cv.VideoCapture(2)
 
 pb  = 'frozen_inference_graph.pb'
 pbt = 'ssd_inception_v2_coco_2017_11_17.pbtxt'
@@ -41,12 +41,7 @@ leaderboardScore = 0 #send to database
 
 def updateScore():
   global leaderboardScore
-  response = supabase.table('leaderboard').select('id').eq(1).execute()
-  if response['count'] > 0:
-    row_id = response['data'][0]['id']
-    response = supabase.table('leaderboard').update({"aura": leaderboardScore}).eq('id', row_id).execute()
-  else:
-    response = supabase.table('leaderboard').insert([{"id": 1, "aura": leaderboardScore}]).execute()
+  response = supabase.table('leaderboard').update({"aura": leaderboardScore}).eq('id', 1).execute()
   print(response)
 
 while True:
@@ -84,34 +79,36 @@ while True:
           print("Recycle")
           print(time.time() - prevtime)
           if (time.time() - prevtime) > 4:
+            print("Send A")
             esp32.write('A'.encode('utf-8'))
             prevtime = time.time()
           if recentGuess == "recycle":
             print("Success")
             leaderboardScore += 150
             updateScore()
-            esp32.write('C'.encode('utf-8'))
+            # esp32.write('C'.encode('utf-8'))
           else:
             print("Wrong Bin")
             leaderboardScore -= 150
             updateScore()
-            esp32.write('D'.encode('utf-8'))
+            # esp32.write('D'.encode('utf-8'))
         else:
           print("Trash")
           print(time.time() - prevtime)
           if (time.time() - prevtime) > 4:
+            print("Send B")
             esp32.write('B'.encode('utf-8'))
             prevtime = time.time()
           if recentGuess == "garbage":
             print("Success")
             leaderboardScore += 100
             updateScore()
-            esp32.write('C'.encode('utf-8'))
+            # esp32.write('C'.encode('utf-8'))
           else:
             print("Wrong bin")
             leaderboardScore -= 200
             updateScore()
-            esp32.write('D'.encode('utf-8'))
+            # esp32.write('D'.encode('utf-8'))
   cv.imshow('my webcam', img)
   if cv.waitKey(1) == 27: 
     break 
