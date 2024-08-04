@@ -31,7 +31,7 @@ cvNet = cv.dnn.readNetFromTensorflow(pb,pbt)
 
 recentGuess = ""
 prevtime = time.time()
-score = 0
+leaderboardScore = 0 #send to database
 
 while True:
   data = esp32.readline().decode('utf-8').strip()
@@ -72,11 +72,11 @@ while True:
             prevtime = time.time()
           if recentGuess == "recycle":
             print("Success")
-            score += 150
+            leaderboardScore += 150
             esp32.write('C'.encode('utf-8'))
           else:
             print("Wrong Bin")
-            score -= 150
+            leaderboardScore -= 150
             esp32.write('D'.encode('utf-8'))
         else:
           print("Trash")
@@ -86,11 +86,11 @@ while True:
             prevtime = time.time()
           if recentGuess == "garbage":
             print("Success")
-            score += 100
+            leaderboardScore += 100
             esp32.write('C'.encode('utf-8'))
           else:
             print("Wrong bin")
-            score -= 200
+            leaderboardScore -= 200
             esp32.write('D'.encode('utf-8'))
   cv.imshow('my webcam', img)
   if cv.waitKey(1) == 27: 
