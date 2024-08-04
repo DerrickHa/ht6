@@ -24,8 +24,8 @@ classes = ["background", "person", "bicycle", "car", "motorcycle",
   "cell phone", "microwave", "oven", "toaster", "sink", "refrigerator", "unknown",
   "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush" ]
 
-recycable = ["cup" , "bottle"]
-trash = ["fork", "spoon", "knife"]
+recycable = ["cup" , "bottle", "fork"]
+trash = ["spoon", "knife"]
 
 colors = np.random.uniform(0, 255, size=(len(classes), 3))
 cam = cv.VideoCapture(2)
@@ -63,7 +63,7 @@ while True:
 
       idx = int(detection[1])   # prediction class index. 
 
-      if classes[idx] != "dining table" and classes[idx]!="person":
+      if classes[idx] != "dining table" and classes[idx]!="person" and classes[idx] != "clock" and classes[idx] != "refrigerator" and classes[idx] != "oven" and classes[idx] != "toilet":
 
         left = detection[3] * cols
         top = detection[4] * rows
