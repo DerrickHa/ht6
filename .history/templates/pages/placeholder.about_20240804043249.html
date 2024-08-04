@@ -1,0 +1,12 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>About</h1>
+</div>
+<p class="lead">An automated waste management solution using advanced sensors and machine learning to sort and process recyclables efficiently, promoting sustainability with real-time monitoring and IoT integration.</p>
+
+<img src="{{ url_for('static', filename='trophy.jpeg') }}" alt="trophy" class='trash'/>
+
+{% endblock %}

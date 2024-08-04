@@ -94,7 +94,7 @@ a {
 /* Various other styles end */
 
 .trash {
-  width: 300px;
+  width: 100px;
   height: auto;
 }
 
@@ -111,3 +111,4 @@ a {
   border-color: #6c757d;
   color: #ffffff; 
 }
+

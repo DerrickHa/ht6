@@ -7,8 +7,8 @@
   <p class="lead">Top contributors to our recycling efforts!</p>
 </div>
 
-<div style="display: flex; justify-content: center;"> <!-- Centering wrapper for the image -->
-  <img src="{{ url_for('static', filename='trophy.jpeg') }}" alt="trophy" class="trash"/>
+<div class="container">
+  <img src="{{ url_for('static', filename='trophy.jpeg') }}" alt="trophy"/>
 </div>
 
 <div class="leaderboard-container">
@@ -36,3 +36,4 @@
 </div>
 
 {% endblock %}
+
