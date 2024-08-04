@@ -20,7 +20,7 @@ def home():
 @app.route('/leaderboard')
 def leaderboard():
     try:
-        response = supabase.table('leaderboard').select('*').order('aura', desc=True, nulls='last').execute()
+        response = supabase.table('leaderboard').select('*').order('aura', desc=True).execute()
         entries = response.data
         app.logger.info(f"Supabase response: {response}")
         return render_template('pages/leaderboard.html', entries=entries)
