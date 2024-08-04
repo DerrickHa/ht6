@@ -3,6 +3,7 @@ import logging
 from logging import Formatter, FileHandler
 from supabase import create_client, Client
 from forms import *
+import subprocess
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -11,6 +12,8 @@ app.config.from_object('config')
 SUPABASE_URL = "https://sndaxdsredktgpsakage.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuZGF4ZHNyZWRrdGdwc2FrYWdlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMjcxOTIyNywiZXhwIjoyMDM4Mjk1MjI3fQ.62q7Xfaifhqg26p6wapWd-bOfekg3ACHw85W4p0h8yM"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+subprocess.run(["python", "/path/to/trashdetector.py"])
 
 @app.route('/')
 def home():
